@@ -48,7 +48,7 @@ def run():
 
 			# Get shcedule activator
 			cur = con.cursor()
-			qry = "SELECT tempValue from activationSchedule where (startTime <= '" + str(curTime) + "' and endTime >= '" + str(curTime) + "') or ((endTime - startTime) < 0 and (('" + str(curTime) + "' >= startTime and '" + str(curTime) + "' < '23:59:59') or ('" + str(curTime) + "' < endTime)))"
+			qry = "SELECT tempValue from activationSchedule where (startTime <= '" + str(curTime) + "' and endTime >= '" + str(curTime) + "') or ((endTime <= startTime) and (endTime >= '" + str(curTime) + "' and startTime >= '" + str(curTime) + "'))"
 			cur.execute(qry)
 			scheduleActivator = cur.fetchone()
 			if scheduleActivator is None:
